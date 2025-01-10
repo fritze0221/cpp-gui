@@ -42,7 +42,7 @@ public:
 
     QSlider* slider;
 
-    int ramp_time = 1000;
+    int ramp_time = 3000;
 
 private:
 
@@ -67,7 +67,7 @@ private:
     const int min_width = 350;
     const int min_height = 100;
 
-    QVector<QRgb> color;
+    QVector<QRgb> sliderColor;
 
     QString sliderStyle = R"(
         QSlider::groove:horizontal {
@@ -102,7 +102,11 @@ signals:
 
     void sendRampPaintEvent();
     void sendScalePaintEvent();
-    void sendRampEvent();
+
+public slots:
+
+    void onStopButton();
+    void onTimeValue(int time);
 
 private slots:
 

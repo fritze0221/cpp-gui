@@ -1,8 +1,10 @@
 #include "veloslider.h"
 
 veloSlider::veloSlider(QWidget *parent, QVector<QRgb> color, int range, int intervall,int scale)
-    : QWidget{parent}, range(range),scale_factor(scale), color(color)
+    : QWidget{parent}, range(range),scale_factor(scale)
 {
+    sliderColor << color;
+
     rampTimer = new QTimer(this);
     slider = new QSlider(Qt::Horizontal);
 
@@ -13,7 +15,7 @@ veloSlider::veloSlider(QWidget *parent, QVector<QRgb> color, int range, int inte
     slider->setMaximum(range);
     slider->setTickInterval(intervall);
     slider->setTickPosition(QSlider::TicksBelow);
-    slider->setStyleSheet(sliderStyle.arg(qRed(color[0])).arg(qGreen(color[0])).arg(qBlue(color[0])));
+    slider->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])));
 
     connect(slider, &QSlider::valueChanged, this, &veloSlider::onValueChanged);
     connect(rampTimer, &QTimer::timeout, this, &veloSlider::onTimer);
@@ -81,7 +83,7 @@ void veloSlider::onScalePaintEvent() {
 void veloSlider::onRampPaintEvent() {
     QPainter painter(this);
 
-    QBrush brush(color[3]);
+    QBrush brush(sliderColor[3]);
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
@@ -98,25 +100,25 @@ void veloSlider::onValueChanged() {
 
     if (value > 0) {
 
-        int r_tmp = ((qRed(color[1]) - (double)qRed(color[0])) / ((double)range)) * value + qRed(color[0]);
-        int g_tmp = ((qGreen(color[1]) - (double)qGreen(color[0])) / ((double)range)) * value + qGreen(color[0]);
-        int b_tmp = ((qBlue(color[1]) - (double)qBlue(color[0])) / ((double)range)) * value + qBlue(color[0]);
+        int r_tmp = ((qRed(sliderColor[1]) - (double)qRed(sliderColor[0])) / ((double)range)) * value + qRed(sliderColor[0]);
+        int g_tmp = ((qGreen(sliderColor[1]) - (double)qGreen(sliderColor[0])) / ((double)range)) * value + qGreen(sliderColor[0]);
+        int b_tmp = ((qBlue(sliderColor[1]) - (double)qBlue(sliderColor[0])) / ((double)range)) * value + qBlue(sliderColor[0]);
 
         slider->setStyleSheet(sliderStyle.arg(r_tmp).arg(g_tmp).arg(b_tmp));
     }
 
     if (value < 0) {
 
-        int r_tmp = -((qRed(color[2]) - (double)qRed(color[0])) / ((double)range)) * value + qRed(color[0]);
-        int g_tmp = -((qGreen(color[2]) - (double)qGreen(color[0])) / ((double)range)) * value + qGreen(color[0]);
-        int b_tmp = -((qBlue(color[2]) - (double)qBlue(color[0])) / ((double)range)) * value + qBlue(color[0]);
+        int r_tmp = -((qRed(sliderColor[2]) - (double)qRed(sliderColor[0])) / ((double)range)) * value + qRed(sliderColor[0]);
+        int g_tmp = -((qGreen(sliderColor[2]) - (double)qGreen(sliderColor[0])) / ((double)range)) * value + qGreen(sliderColor[0]);
+        int b_tmp = -((qBlue(sliderColor[2]) - (double)qBlue(sliderColor[0])) / ((double)range)) * value + qBlue(sliderColor[0]);
 
         slider->setStyleSheet(sliderStyle.arg(r_tmp).arg(g_tmp).arg(b_tmp));
     }
 
     if (value == 0) {
 
-        slider->setStyleSheet(sliderStyle.arg(qRed(color[0])).arg(qGreen(color[0])).arg(qBlue(color[0])));
+        slider->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])));
 
     }
 
@@ -130,10 +132,18 @@ void veloSlider::onValueChanged() {
 
     }
 
+    if(ramp_time_delta != 0){
 
-    rampTimer->setInterval(ramp_time_delta);
-    rampTimer->start();
+        rampTimer->setInterval(ramp_time_delta);
+        rampTimer->start();
 
+    }
+    else{
+
+        ramp_slider_value = scale_factor*slider->value();
+        repaint();
+
+    }
 
 }
 
@@ -158,4 +168,17 @@ void veloSlider::onTimer() {
     }
 }
 
+void veloSlider::onStopButton(){
+
+    slider->setValue(0);
+    ramp_slider_value = 0;
+    repaint();
+
+}
+
+void veloSlider::onTimeValue(int time){
+
+    ramp_time = time;
+
+}
 

@@ -16,10 +16,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     //wTrain1 = new Train(this);
 
-    //veloSlider* slider = new veloSlider(this,193,125,8,50);
-
     wTraincontrol1 = new Traincontrol(this);
-    //wTraincontrol2 = new Traincontrol(this);
+    wTraincontrol2 = new Traincontrol(this);
 
     QWidget* centralWidget = new QWidget(this);
 
@@ -31,8 +29,7 @@ MainWindow::MainWindow(QWidget* parent)
     // mainLayout->addWidget(wHouse1);
     // mainLayout->addWidget(wHouse2);
     mainLayout->addWidget(wTraincontrol1);
-   // mainLayout->addWidget(wTraincontrol2);
-
+    mainLayout->addWidget(wTraincontrol2);
 
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);

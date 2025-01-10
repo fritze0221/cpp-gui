@@ -4,6 +4,7 @@
 #include "led.h"
 #include "house.h"
 #include "traincontrol.h"
+#include "timeslider.h"
 
 
 class MainWindow : public QMainWindow{

@@ -11,6 +11,8 @@
 
 #include "modbutton.h"
 #include "veloslider.h"
+#include "timeslider.h"
+#include "timelabel.h"
 
 
 class Traincontrol : public QWidget
@@ -19,8 +21,10 @@ class Traincontrol : public QWidget
 public:
     explicit Traincontrol(QWidget *parent);
 
-    veloSlider* slider;
-    modButton* button;
+    veloSlider* wVeloSlider;
+    modButton* wStopButton;
+    timeSlider* wTimeSlider;
+    timeLabel* wTimeLabel;
 
     QVector<QRgb> veloSliderColor = {
         qRgb(173, 152, 59),
@@ -29,9 +33,13 @@ public:
         qRgb(57, 61, 48)
     };
 
+    QVector<QRgb> timeSliderColor = {
+        qRgb(173, 101, 114)
+    };
+
     QVector<QRgb> modButtonColor = {
         qRgb(173, 152, 59),
-        qRgb(29, 140, 68)
+        qRgb(201, 4, 40)
     };
 
 
