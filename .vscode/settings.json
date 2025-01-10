@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "qgridlayout": "cpp",
+        "new": "cpp",
+        "ratio": "cpp",
+        "chrono": "cpp",
+        "optional": "cpp",
+        "format": "cpp",
+        "system_error": "cpp",
+        "qmainwindow": "cpp"
+    }
+}
