@@ -42,7 +42,7 @@ public:
 
     QSlider* slider;
 
-    int ramp_time = 3000;
+    int ramp_time = 0;
 
 private:
 

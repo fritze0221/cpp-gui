@@ -21,7 +21,7 @@ HEADERS += pro.h \
     house.h \
     led.h \
     modbutton.h \
-    timelabel.h \
+    modlabel.h \
     timeslider.h \
     traincontrol.h \
     veloslider.h
@@ -30,7 +30,7 @@ SOURCES += main.cpp pro.cpp \
     house.cpp \
     led.cpp \
     modbutton.cpp \
-    timelabel.cpp \
+    modlabel.cpp \
     timeslider.cpp \
     traincontrol.cpp \
     veloslider.cpp

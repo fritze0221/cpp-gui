@@ -7,24 +7,32 @@ Traincontrol::Traincontrol(QWidget *parent)
     wVeloSlider = new veloSlider(this,veloSliderColor,5,1,10);
     wStopButton = new modButton(this,modButtonColor,1,"Stop");
     wTimeSlider = new timeSlider(this,timeSliderColor,5,1);
-    wTimeLabel = new timeLabel(this,"Test");
+
+    wTimeLabel = new modLabel(this,"Time");
+    wVeloLabel = new modLabel(this,"Speed");
 
     connect(wStopButton, &modButton::modButtonClicked, wVeloSlider, &veloSlider::onStopButton);
     connect(wTimeSlider, &timeSlider::sendTime, wVeloSlider, &veloSlider::onTimeValue);
+
+    QHBoxLayout* labellayout = new QHBoxLayout();
+
+    labellayout->addWidget(wTimeLabel);
 
     QHBoxLayout* velolayout = new QHBoxLayout();
 
     velolayout->addWidget(wTimeSlider);
     velolayout->addWidget(wVeloSlider);
+    velolayout->addWidget(wVeloLabel);
 
-    QVBoxLayout* timelayout = new QVBoxLayout();
+    QVBoxLayout* buttonlayout = new QVBoxLayout();
 
-    timelayout->addWidget(wStopButton);
+    buttonlayout->addWidget(wStopButton);
 
     QVBoxLayout* layout = new QVBoxLayout();
 
+    layout->addLayout(labellayout);
     layout->addLayout(velolayout);
-    layout->addLayout(timelayout);
+    layout->addLayout(buttonlayout);
 
     setLayout(layout);
 }

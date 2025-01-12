@@ -58,7 +58,7 @@ SOURCES       = ../../main.cpp \
 		../../house.cpp \
 		../../led.cpp \
 		../../modbutton.cpp \
-		../../timelabel.cpp \
+		../../modlabel.cpp \
 		../../timeslider.cpp \
 		../../traincontrol.cpp \
 		../../veloslider.cpp qrc_res.cpp \
@@ -66,7 +66,7 @@ SOURCES       = ../../main.cpp \
 		moc_house.cpp \
 		moc_led.cpp \
 		moc_modbutton.cpp \
-		moc_timelabel.cpp \
+		moc_modlabel.cpp \
 		moc_timeslider.cpp \
 		moc_traincontrol.cpp \
 		moc_veloslider.cpp
@@ -76,7 +76,7 @@ OBJECTS       = main.o \
 		house.o \
 		led.o \
 		modbutton.o \
-		timelabel.o \
+		modlabel.o \
 		timeslider.o \
 		traincontrol.o \
 		veloslider.o \
@@ -85,7 +85,7 @@ OBJECTS       = main.o \
 		moc_house.o \
 		moc_led.o \
 		moc_modbutton.o \
-		moc_timelabel.o \
+		moc_modlabel.o \
 		moc_timeslider.o \
 		moc_traincontrol.o \
 		moc_veloslider.o
@@ -348,7 +348,7 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		../../house.h \
 		../../led.h \
 		../../modbutton.h \
-		../../timelabel.h \
+		../../modlabel.h \
 		../../timeslider.h \
 		../../traincontrol.h \
 		../../veloslider.h ../../main.cpp \
@@ -357,7 +357,7 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		../../house.cpp \
 		../../led.cpp \
 		../../modbutton.cpp \
-		../../timelabel.cpp \
+		../../modlabel.cpp \
 		../../timeslider.cpp \
 		../../traincontrol.cpp \
 		../../veloslider.cpp
@@ -907,8 +907,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../pro.h ../../fonts.h ../../house.h ../../led.h ../../modbutton.h ../../timelabel.h ../../timeslider.h ../../traincontrol.h ../../veloslider.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../pro.cpp ../../fonts.cpp ../../house.cpp ../../led.cpp ../../modbutton.cpp ../../timelabel.cpp ../../timeslider.cpp ../../traincontrol.cpp ../../veloslider.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../pro.h ../../fonts.h ../../house.h ../../led.h ../../modbutton.h ../../modlabel.h ../../timeslider.h ../../traincontrol.h ../../veloslider.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../pro.cpp ../../fonts.cpp ../../house.cpp ../../led.cpp ../../modbutton.cpp ../../modlabel.cpp ../../timeslider.cpp ../../traincontrol.cpp ../../veloslider.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../design.ui $(DISTDIR)/
 
 
@@ -946,9 +946,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_pro.cpp moc_house.cpp moc_led.cpp moc_modbutton.cpp moc_timelabel.cpp moc_timeslider.cpp moc_traincontrol.cpp moc_veloslider.cpp
+compiler_moc_header_make_all: moc_pro.cpp moc_house.cpp moc_led.cpp moc_modbutton.cpp moc_modlabel.cpp moc_timeslider.cpp moc_traincontrol.cpp moc_veloslider.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_pro.cpp moc_house.cpp moc_led.cpp moc_modbutton.cpp moc_timelabel.cpp moc_timeslider.cpp moc_traincontrol.cpp moc_veloslider.cpp
+	-$(DEL_FILE) moc_pro.cpp moc_house.cpp moc_led.cpp moc_modbutton.cpp moc_modlabel.cpp moc_timeslider.cpp moc_traincontrol.cpp moc_veloslider.cpp
 moc_pro.cpp: ../../pro.h \
 		../../led.h \
 		../../house.h \
@@ -957,7 +957,7 @@ moc_pro.cpp: ../../pro.h \
 		../../fonts.h \
 		../../veloslider.h \
 		../../timeslider.h \
-		../../timelabel.h \
+		../../modlabel.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../pro.h -o moc_pro.cpp
@@ -978,11 +978,11 @@ moc_modbutton.cpp: ../../modbutton.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../modbutton.h -o moc_modbutton.cpp
 
-moc_timelabel.cpp: ../../timelabel.h \
+moc_modlabel.cpp: ../../modlabel.h \
 		../../fonts.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../timelabel.h -o moc_timelabel.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../modlabel.h -o moc_modlabel.cpp
 
 moc_timeslider.cpp: ../../timeslider.h \
 		../../fonts.h \
@@ -995,7 +995,7 @@ moc_traincontrol.cpp: ../../traincontrol.h \
 		../../fonts.h \
 		../../veloslider.h \
 		../../timeslider.h \
-		../../timelabel.h \
+		../../modlabel.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../traincontrol.h -o moc_traincontrol.cpp
@@ -1035,7 +1035,7 @@ main.o: ../../main.cpp ../../pro.h \
 		../../fonts.h \
 		../../veloslider.h \
 		../../timeslider.h \
-		../../timelabel.h
+		../../modlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 pro.o: ../../pro.cpp ../../pro.h \
@@ -1046,7 +1046,7 @@ pro.o: ../../pro.cpp ../../pro.h \
 		../../fonts.h \
 		../../veloslider.h \
 		../../timeslider.h \
-		../../timelabel.h
+		../../modlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pro.o ../../pro.cpp
 
 fonts.o: ../../fonts.cpp ../../fonts.h
@@ -1062,9 +1062,9 @@ modbutton.o: ../../modbutton.cpp ../../modbutton.h \
 		../../fonts.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modbutton.o ../../modbutton.cpp
 
-timelabel.o: ../../timelabel.cpp ../../timelabel.h \
+modlabel.o: ../../modlabel.cpp ../../modlabel.h \
 		../../fonts.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timelabel.o ../../timelabel.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modlabel.o ../../modlabel.cpp
 
 timeslider.o: ../../timeslider.cpp ../../timeslider.h \
 		../../fonts.h
@@ -1075,7 +1075,7 @@ traincontrol.o: ../../traincontrol.cpp ../../traincontrol.h \
 		../../fonts.h \
 		../../veloslider.h \
 		../../timeslider.h \
-		../../timelabel.h
+		../../modlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o traincontrol.o ../../traincontrol.cpp
 
 veloslider.o: ../../veloslider.cpp ../../veloslider.h \
@@ -1097,8 +1097,8 @@ moc_led.o: moc_led.cpp
 moc_modbutton.o: moc_modbutton.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modbutton.o moc_modbutton.cpp
 
-moc_timelabel.o: moc_timelabel.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_timelabel.o moc_timelabel.cpp
+moc_modlabel.o: moc_modlabel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modlabel.o moc_modlabel.cpp
 
 moc_timeslider.o: moc_timeslider.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_timeslider.o moc_timeslider.cpp

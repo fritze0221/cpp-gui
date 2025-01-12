@@ -124,7 +124,9 @@ void veloSlider::onValueChanged() {
 
     if (ramp_slider_value != scale_factor*slider->value()) {
 
-        ramp_time_delta = ramp_time / (std::abs(ramp_slider_value - scale_factor*slider->value()));
+        ramp_time_delta = ramp_time / scale_factor;
+
+        qDebug() << ramp_time_delta;
 
     } else {
 
