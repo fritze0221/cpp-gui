@@ -20,16 +20,18 @@ HEADERS += pro.h \
     fonts/fonts.h \
     house.h \
     led.h \
-    traincontrol/modbutton.h \
-    traincontrol/timeslider.h \
+    traincontrol/accslider.h \
+    modbutton.h \
+    traincontrol/infolabel.h \
     traincontrol/traincontrol.h \
     traincontrol/veloslider.h
 SOURCES += main.cpp pro.cpp \
     fonts/fonts.cpp \
     house.cpp \
     led.cpp \
-    traincontrol/modbutton.cpp \
-    traincontrol/timeslider.cpp \
+    traincontrol/accslider.cpp \
+    modbutton.cpp \
+    traincontrol/infolabel.cpp \
     traincontrol/traincontrol.cpp \
     traincontrol/veloslider.cpp
 

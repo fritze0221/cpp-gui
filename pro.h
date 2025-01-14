@@ -3,8 +3,7 @@
 
 #include "led.h"
 #include "house.h"
-#include "traincontrol.h"
-#include "timeslider.h"
+#include "traincontrol//traincontrol.h"
 
 
 class MainWindow : public QMainWindow{

@@ -1,5 +1,4 @@
 #include "pro.h"
-#include "traincontrol.h"
 
 int main(int argc, char* argv[]){
 

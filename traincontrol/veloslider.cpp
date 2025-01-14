@@ -5,6 +5,10 @@ veloSlider::veloSlider(QWidget *parent, QVector<QRgb> color, int range, int inte
 {
     sliderColor << color;
 
+    r_timer = qRed(sliderColor[0]);
+    g_timer = qGreen(sliderColor[0]);
+    b_timer = qBlue(sliderColor[0]);
+
     rampTimer = new QTimer(this);
     colorTimer = new QTimer(this);
 
@@ -24,7 +28,9 @@ veloSlider::veloSlider(QWidget *parent, QVector<QRgb> color, int range, int inte
 
     connect(slider, &QSlider::valueChanged, this, &veloSlider::onValueChanged);
     connect(this, &veloSlider::sendTimeValueChanged, this, &veloSlider::onValueChanged);
+
     connect(rampTimer, &QTimer::timeout, this, &veloSlider::onTimer);
+    connect(colorTimer, &QTimer::timeout, this, &veloSlider::onColorTimer);
 
     connect(this, &veloSlider::sendRampPaintEvent, this, &veloSlider::onRampPaintEvent);
     connect(this, &veloSlider::sendScalePaintEvent, this, &veloSlider::onScalePaintEvent);
@@ -107,37 +113,68 @@ void veloSlider::onRampPaintEvent() {
 void veloSlider::onValueChanged() {
     double value = slider->value();
 
-    if (value > 0) {
+    int abs_value = std::abs(value);
 
-        int r_tmp = ((qRed(sliderColor[2]) - (double)qRed(sliderColor[0])) / ((double)range)) * value + qRed(sliderColor[0]);
-        int g_tmp = ((qGreen(sliderColor[2]) - (double)qGreen(sliderColor[0])) / ((double)range)) * value + qGreen(sliderColor[0]);
-        int b_tmp = ((qBlue(sliderColor[2]) - (double)qBlue(sliderColor[0])) / ((double)range)) * value + qBlue(sliderColor[0]);
+    r_tmp = ((qRed(sliderColor[2]) - (double)qRed(sliderColor[0])) / ((double)range)) * abs_value + qRed(sliderColor[0]);
+    g_tmp = ((qGreen(sliderColor[2]) - (double)qGreen(sliderColor[0])) / ((double)range)) * abs_value + qGreen(sliderColor[0]);
+    b_tmp = ((qBlue(sliderColor[2]) - (double)qBlue(sliderColor[0])) / ((double)range)) * abs_value + qBlue(sliderColor[0]);
+
+    if(value != 0){
+
+        static int value_state = 0;
+
+        if (value > 0) {
+
+            if(value_state == -1){
+
+                r_timer = r_tmp;
+                g_timer = g_tmp;
+                b_timer = b_tmp;
+
+            }
+
+            slider->setStyleSheet(sliderStyle.arg(r_tmp).arg(g_tmp).arg(b_tmp).arg(r_timer).arg(g_timer).arg(b_timer));
+
+            value_state = 1;
+        }
+
+        if (value < 0) {
+
+            if(value_state == 1){
+
+                r_timer = r_tmp;
+                g_timer = g_tmp;
+                b_timer = b_tmp;
+
+            }
+
+            slider->setStyleSheet(sliderStyle.arg(r_timer).arg(g_timer).arg(b_timer).arg(r_tmp).arg(g_tmp).arg(b_tmp));
+
+            value_state = -1;
+
+        }
 
 
-        slider->setStyleSheet(sliderStyle.arg(r_tmp).arg(g_tmp).arg(b_tmp).arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])));
+        if(((r_timer != qRed(sliderColor[1])) || (g_timer != qGreen(sliderColor[1])) || (b_timer != qBlue(sliderColor[1])))){
 
-        velo
+            colorTimer->setInterval(colorTime);
+            colorTimer->start();
+        }
+    }
+
+    else {
+
+        r_timer = qRed(sliderColor[0]);
+        g_timer = qGreen(sliderColor[0]);
+        b_timer = qBlue(sliderColor[0]);
+
+        slider->setStyleSheet(sliderStyle.arg(r_tmp).arg(g_tmp).arg(b_tmp).arg(r_tmp).arg(g_tmp).arg(b_tmp));
+
+        colorTimer->stop();
 
     }
 
-    if (value < 0) {
 
-        value = std::abs(value);
-
-        int r_tmp = ((qRed(sliderColor[2]) - (double)qRed(sliderColor[0])) / ((double)range)) * value + qRed(sliderColor[0]);
-        int g_tmp = ((qGreen(sliderColor[2]) - (double)qGreen(sliderColor[0])) / ((double)range)) * value + qGreen(sliderColor[0]);
-        int b_tmp = ((qBlue(sliderColor[2]) - (double)qBlue(sliderColor[0])) / ((double)range)) * value + qBlue(sliderColor[0]);
-
-        slider->setStyleSheet(sliderStyle.arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])).arg(r_tmp).arg(g_tmp).arg(b_tmp));
-        colorTimer->setInterval(colorTime);
-        colorTimer->start();
-    }
-
-    if (value == 0) {
-
-        slider->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])).arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])));
-
-    }
 
     if (ramp_slider_value != scale_factor*slider->value()) {
 
@@ -202,3 +239,43 @@ void veloSlider::onTimeValue(int time){
 
 }
 
+void veloSlider::onColorTimer(){
+
+    if(r_timer > qRed(sliderColor[1])) r_timer--;
+    else{ r_timer++; }
+
+    if(g_timer > qGreen(sliderColor[1])) g_timer--;
+    else{ g_timer++; };
+
+    if(b_timer > qBlue(sliderColor[1])) b_timer--;
+    else{  b_timer++; };
+
+
+    r_timer = qBound(0, r_timer, 255);
+    g_timer = qBound(0, g_timer, 255);
+    b_timer = qBound(0, b_timer, 255);
+
+    int value = slider->value();
+
+    if (value > 0) {
+
+        slider->setStyleSheet(sliderStyle.arg(r_tmp).arg(g_tmp).arg(b_tmp).arg(r_timer).arg(g_timer).arg(b_timer));
+
+    }
+
+    if (value < 0) {
+
+
+        slider->setStyleSheet(sliderStyle.arg(r_timer).arg(g_timer).arg(b_timer).arg(r_tmp).arg(g_tmp).arg(b_tmp));
+
+    }
+
+    if((value != 0) && ((r_timer != qRed(sliderColor[1])) || (g_timer != qGreen(sliderColor[1])) || (b_timer != qBlue(sliderColor[1])))){
+
+
+        colorTimer->setInterval(colorTime);
+        colorTimer->start();
+
+    }
+
+}

@@ -31,8 +31,8 @@ public:
      * @param parent Ein Zeiger auf das übergeordnete Widget.
      * @param color  Ein QVector mit QRgb-Werten, die die Farben des Sliders definieren.
      *               - `color[0]`: Farbe für den Neutralwert.
-     *               - `color[1]`: Farbe für positive Werte.
-     *               - `color[2]`: Farbe für negative Werte.
+     *               - `color[1]`: Farbe für verblassenden Wert.
+     *               - `color[2]`: Farbe für Zielwert.
      *               - `color[3]`: Farbe für Reckteck.
      * @param range  Der maximale absolute Bereich des Sliders (z. B. `-range` bis `+range`).
      * @param intervall Das Intervall zwischen den Ticks (Schritte auf dem Slider).
@@ -44,7 +44,7 @@ public:
     QSlider* slider;
     QLabel* label;
 
-    int ramp_time = 0;
+    int ramp_time = 2000;
 
 private:
 
@@ -54,9 +54,14 @@ private:
     QTimer* colorTimer;
 
     int colorTime = 1;
-    int r = 0;
-    int g = 0;
-    int b = 0;
+
+    int r_timer = 0;
+    int g_timer = 0;
+    int b_timer = 0;
+
+    int r_tmp = 0;
+    int g_tmp = 0;
+    int b_tmp = 0;
 
     int ramp_time_delta;
 
@@ -125,7 +130,9 @@ public slots:
 private slots:
 
     void onValueChanged();
+
     void onTimer();
+    void onColorTimer();
 
     void onScalePaintEvent();
     void onRampPaintEvent();
