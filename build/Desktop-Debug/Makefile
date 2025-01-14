@@ -56,33 +56,45 @@ SOURCES       = ../../main.cpp \
 		../../pro.cpp \
 		../../fonts/fonts.cpp \
 		../../house.cpp \
-		../../led.cpp \
-		../../traincontrol/accslider.cpp \
 		../../modbutton.cpp \
+		../../ledcontrol/led.cpp \
+		../../ledcontrol/ledcontrol.cpp \
+		../../switchcontrol/switchcontrol.cpp \
+		../../traincontrol/accslider.cpp \
+		../../traincontrol/infolabel.cpp \
 		../../traincontrol/traincontrol.cpp \
 		../../traincontrol/veloslider.cpp qrc_res.cpp \
 		moc_pro.cpp \
 		moc_house.cpp \
-		moc_led.cpp \
-		moc_accslider.cpp \
 		moc_modbutton.cpp \
+		moc_led.cpp \
+		moc_ledcontrol.cpp \
+		moc_switchcontrol.cpp \
+		moc_accslider.cpp \
+		moc_infolabel.cpp \
 		moc_traincontrol.cpp \
 		moc_veloslider.cpp
 OBJECTS       = main.o \
 		pro.o \
 		fonts.o \
 		house.o \
-		led.o \
-		accslider.o \
 		modbutton.o \
+		led.o \
+		ledcontrol.o \
+		switchcontrol.o \
+		accslider.o \
+		infolabel.o \
 		traincontrol.o \
 		veloslider.o \
 		qrc_res.o \
 		moc_pro.o \
 		moc_house.o \
-		moc_led.o \
-		moc_accslider.o \
 		moc_modbutton.o \
+		moc_led.o \
+		moc_ledcontrol.o \
+		moc_switchcontrol.o \
+		moc_accslider.o \
+		moc_infolabel.o \
 		moc_traincontrol.o \
 		moc_veloslider.o
 DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
@@ -342,17 +354,23 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		../../../../project.pro ../../pro.h \
 		../../fonts/fonts.h \
 		../../house.h \
-		../../led.h \
-		../../traincontrol/accslider.h \
 		../../modbutton.h \
+		../../ledcontrol/led.h \
+		../../ledcontrol/ledcontrol.h \
+		../../switchcontrol/switchcontrol.h \
+		../../traincontrol/accslider.h \
+		../../traincontrol/infolabel.h \
 		../../traincontrol/traincontrol.h \
 		../../traincontrol/veloslider.h ../../main.cpp \
 		../../pro.cpp \
 		../../fonts/fonts.cpp \
 		../../house.cpp \
-		../../led.cpp \
-		../../traincontrol/accslider.cpp \
 		../../modbutton.cpp \
+		../../ledcontrol/led.cpp \
+		../../ledcontrol/ledcontrol.cpp \
+		../../switchcontrol/switchcontrol.cpp \
+		../../traincontrol/accslider.cpp \
+		../../traincontrol/infolabel.cpp \
 		../../traincontrol/traincontrol.cpp \
 		../../traincontrol/veloslider.cpp
 QMAKE_TARGET  = project
@@ -901,8 +919,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../pro.h ../../fonts/fonts.h ../../house.h ../../led.h ../../traincontrol/accslider.h ../../modbutton.h ../../traincontrol/traincontrol.h ../../traincontrol/veloslider.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../pro.cpp ../../fonts/fonts.cpp ../../house.cpp ../../led.cpp ../../traincontrol/accslider.cpp ../../modbutton.cpp ../../traincontrol/traincontrol.cpp ../../traincontrol/veloslider.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../pro.h ../../fonts/fonts.h ../../house.h ../../modbutton.h ../../ledcontrol/led.h ../../ledcontrol/ledcontrol.h ../../switchcontrol/switchcontrol.h ../../traincontrol/accslider.h ../../traincontrol/infolabel.h ../../traincontrol/traincontrol.h ../../traincontrol/veloslider.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../pro.cpp ../../fonts/fonts.cpp ../../house.cpp ../../modbutton.cpp ../../ledcontrol/led.cpp ../../ledcontrol/ledcontrol.cpp ../../switchcontrol/switchcontrol.cpp ../../traincontrol/accslider.cpp ../../traincontrol/infolabel.cpp ../../traincontrol/traincontrol.cpp ../../traincontrol/veloslider.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -939,17 +957,21 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_pro.cpp moc_house.cpp moc_led.cpp moc_accslider.cpp moc_modbutton.cpp moc_traincontrol.cpp moc_veloslider.cpp
+compiler_moc_header_make_all: moc_pro.cpp moc_house.cpp moc_modbutton.cpp moc_led.cpp moc_ledcontrol.cpp moc_switchcontrol.cpp moc_accslider.cpp moc_infolabel.cpp moc_traincontrol.cpp moc_veloslider.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_pro.cpp moc_house.cpp moc_led.cpp moc_accslider.cpp moc_modbutton.cpp moc_traincontrol.cpp moc_veloslider.cpp
+	-$(DEL_FILE) moc_pro.cpp moc_house.cpp moc_modbutton.cpp moc_led.cpp moc_ledcontrol.cpp moc_switchcontrol.cpp moc_accslider.cpp moc_infolabel.cpp moc_traincontrol.cpp moc_veloslider.cpp
 moc_pro.cpp: ../../pro.h \
-		../../led.h \
 		../../house.h \
 		../../traincontrol/traincontrol.h \
 		../../traincontrol/modbutton.h \
 		../../fonts/fonts.h \
 		../../traincontrol/veloslider.h \
 		../../traincontrol/accslider.h \
+		../../traincontrol/infolabel.h \
+		../../ledcontrol/ledcontrol.h \
+		../../ledcontrol/led.h \
+		../../switchcontrol/switchcontrol.h \
+		../../modbutton.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../pro.h -o moc_pro.cpp
@@ -959,10 +981,29 @@ moc_house.cpp: ../../house.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../house.h -o moc_house.cpp
 
-moc_led.cpp: ../../led.h \
+moc_modbutton.cpp: ../../modbutton.h \
+		../../fonts/fonts.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../led.h -o moc_led.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../modbutton.h -o moc_modbutton.cpp
+
+moc_led.cpp: ../../ledcontrol/led.h \
+		moc_predefs.h \
+		/usr/lib/qt6/moc
+	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../ledcontrol/led.h -o moc_led.cpp
+
+moc_ledcontrol.cpp: ../../ledcontrol/ledcontrol.h \
+		../../ledcontrol/led.h \
+		moc_predefs.h \
+		/usr/lib/qt6/moc
+	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../ledcontrol/ledcontrol.h -o moc_ledcontrol.cpp
+
+moc_switchcontrol.cpp: ../../switchcontrol/switchcontrol.h \
+		../../modbutton.h \
+		../../fonts/fonts.h \
+		moc_predefs.h \
+		/usr/lib/qt6/moc
+	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../switchcontrol/switchcontrol.h -o moc_switchcontrol.cpp
 
 moc_accslider.cpp: ../../traincontrol/accslider.h \
 		../../fonts/fonts.h \
@@ -970,17 +1011,18 @@ moc_accslider.cpp: ../../traincontrol/accslider.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../traincontrol/accslider.h -o moc_accslider.cpp
 
-moc_modbutton.cpp: ../../modbutton.h \
+moc_infolabel.cpp: ../../traincontrol/infolabel.h \
 		../../fonts/fonts.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../modbutton.h -o moc_modbutton.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../traincontrol/infolabel.h -o moc_infolabel.cpp
 
 moc_traincontrol.cpp: ../../traincontrol/traincontrol.h \
 		../../traincontrol/modbutton.h \
 		../../fonts/fonts.h \
 		../../traincontrol/veloslider.h \
 		../../traincontrol/accslider.h \
+		../../traincontrol/infolabel.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/urs/Documents/cpp-gui/project/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/urs/Documents/cpp-gui/project -I/home/urs/Documents/cpp-gui/project -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../traincontrol/traincontrol.h -o moc_traincontrol.cpp
@@ -1008,23 +1050,31 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 main.o: ../../main.cpp ../../pro.h \
-		../../led.h \
 		../../house.h \
 		../../traincontrol/traincontrol.h \
 		../../traincontrol/modbutton.h \
 		../../fonts/fonts.h \
 		../../traincontrol/veloslider.h \
-		../../traincontrol/accslider.h
+		../../traincontrol/accslider.h \
+		../../traincontrol/infolabel.h \
+		../../ledcontrol/ledcontrol.h \
+		../../ledcontrol/led.h \
+		../../switchcontrol/switchcontrol.h \
+		../../modbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 pro.o: ../../pro.cpp ../../pro.h \
-		../../led.h \
 		../../house.h \
 		../../traincontrol/traincontrol.h \
 		../../traincontrol/modbutton.h \
 		../../fonts/fonts.h \
 		../../traincontrol/veloslider.h \
-		../../traincontrol/accslider.h
+		../../traincontrol/accslider.h \
+		../../traincontrol/infolabel.h \
+		../../ledcontrol/ledcontrol.h \
+		../../ledcontrol/led.h \
+		../../switchcontrol/switchcontrol.h \
+		../../modbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pro.o ../../pro.cpp
 
 fonts.o: ../../fonts/fonts.cpp ../../fonts/fonts.h
@@ -1033,22 +1083,36 @@ fonts.o: ../../fonts/fonts.cpp ../../fonts/fonts.h
 house.o: ../../house.cpp ../../house.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o house.o ../../house.cpp
 
-led.o: ../../led.cpp ../../led.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o led.o ../../led.cpp
+modbutton.o: ../../modbutton.cpp ../../modbutton.h \
+		../../fonts/fonts.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modbutton.o ../../modbutton.cpp
+
+led.o: ../../ledcontrol/led.cpp ../../ledcontrol/led.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o led.o ../../ledcontrol/led.cpp
+
+ledcontrol.o: ../../ledcontrol/ledcontrol.cpp ../../ledcontrol/ledcontrol.h \
+		../../ledcontrol/led.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ledcontrol.o ../../ledcontrol/ledcontrol.cpp
+
+switchcontrol.o: ../../switchcontrol/switchcontrol.cpp ../../switchcontrol/switchcontrol.h \
+		../../modbutton.h \
+		../../fonts/fonts.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o switchcontrol.o ../../switchcontrol/switchcontrol.cpp
 
 accslider.o: ../../traincontrol/accslider.cpp ../../traincontrol/accslider.h \
 		../../fonts/fonts.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o accslider.o ../../traincontrol/accslider.cpp
 
-modbutton.o: ../../modbutton.cpp ../../modbutton.h \
+infolabel.o: ../../traincontrol/infolabel.cpp ../../traincontrol/infolabel.h \
 		../../fonts/fonts.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modbutton.o ../../modbutton.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infolabel.o ../../traincontrol/infolabel.cpp
 
 traincontrol.o: ../../traincontrol/traincontrol.cpp ../../traincontrol/traincontrol.h \
 		../../traincontrol/modbutton.h \
 		../../fonts/fonts.h \
 		../../traincontrol/veloslider.h \
-		../../traincontrol/accslider.h
+		../../traincontrol/accslider.h \
+		../../traincontrol/infolabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o traincontrol.o ../../traincontrol/traincontrol.cpp
 
 veloslider.o: ../../traincontrol/veloslider.cpp ../../traincontrol/veloslider.h \
@@ -1064,14 +1128,23 @@ moc_pro.o: moc_pro.cpp
 moc_house.o: moc_house.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_house.o moc_house.cpp
 
+moc_modbutton.o: moc_modbutton.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modbutton.o moc_modbutton.cpp
+
 moc_led.o: moc_led.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_led.o moc_led.cpp
+
+moc_ledcontrol.o: moc_ledcontrol.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ledcontrol.o moc_ledcontrol.cpp
+
+moc_switchcontrol.o: moc_switchcontrol.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_switchcontrol.o moc_switchcontrol.cpp
 
 moc_accslider.o: moc_accslider.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_accslider.o moc_accslider.cpp
 
-moc_modbutton.o: moc_modbutton.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modbutton.o moc_modbutton.cpp
+moc_infolabel.o: moc_infolabel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_infolabel.o moc_infolabel.cpp
 
 moc_traincontrol.o: moc_traincontrol.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_traincontrol.o moc_traincontrol.cpp
