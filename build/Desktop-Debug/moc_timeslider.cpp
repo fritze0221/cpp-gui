@@ -6,7 +6,8 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../timeslider.h"
+#include "../../traincontrol/timeslider.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

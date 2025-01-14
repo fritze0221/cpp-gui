@@ -17,26 +17,23 @@ QT += gui
 
 # Input
 HEADERS += pro.h \
-    fonts.h \
+    fonts/fonts.h \
     house.h \
     led.h \
-    modbutton.h \
-    modlabel.h \
-    timeslider.h \
-    traincontrol.h \
-    veloslider.h
+    traincontrol/modbutton.h \
+    traincontrol/timeslider.h \
+    traincontrol/traincontrol.h \
+    traincontrol/veloslider.h
 SOURCES += main.cpp pro.cpp \
-    fonts.cpp \
+    fonts/fonts.cpp \
     house.cpp \
     led.cpp \
-    modbutton.cpp \
-    modlabel.cpp \
-    timeslider.cpp \
-    traincontrol.cpp \
-    veloslider.cpp
+    traincontrol/modbutton.cpp \
+    traincontrol/timeslider.cpp \
+    traincontrol/traincontrol.cpp \
+    traincontrol/veloslider.cpp
 
 RESOURCES += \
     res.qrc
 
-FORMS += \
-    design.ui
+FORMS +=
