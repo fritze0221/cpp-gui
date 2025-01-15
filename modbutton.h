@@ -31,14 +31,15 @@ public:
      *
      * @param parent Ein Zeiger auf das übergeordnete Widget.
      * @param color  Ein QVector mit QRgb-Werten, die die Farben des Sliders definieren.
-     *               - `color[0]`: Farbe für den Neutralwert.
-     *               - `color[1]`: Farbe für den Endwert.
-     * @param time  Der maximale absolute Bereich des Sliders (z. B. `-range` bis `+range`).
+     *               - `color[0]`: Farbe für den Button (released).
+     *               - `color[1]`: Farbe für den Buttonrand (released).
+     *               - `color[2]`: Farbe für den Button (pushed).
+     *               - `color[3]`: Farbe für den Buttonrand (pushed) .
      * @param text Buttontext.
      */
 
 
-    modButton(QWidget *parent, QVector<QRgb> color, int time, QString text);
+    modButton(QWidget *parent, QVector<QRgb> color, QString text);
     ~modButton();
 
     QPushButton* button;
@@ -49,12 +50,6 @@ private:
     int r_tmp = 0;
     int g_tmp = 0;
     int b_tmp = 0;
-
-    void updateButtonColor(int r, int g, int b);
-
-    int counter(int color1,int color2);
-
-    int time = 0;
 
     QVector<QRgb> ButtonColor;
     QString ButtonText;

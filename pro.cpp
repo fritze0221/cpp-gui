@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     wSwitchcontrol = new Switchcontrol(this);
 
+    wTurbincontrol = new Turbincontrol(this);
+
     QWidget* centralWidget = new QWidget(this);
 
     // connect(wHouse1, &House::requestOpenSubWindow, this, [=](){handleSubWindow(wLED1);});
@@ -38,22 +40,24 @@ MainWindow::MainWindow(QWidget* parent)
 
     ledlayout->addWidget(wLedcontrol1);
     ledlayout->addWidget(wLedcontrol2);
+    ledlayout->addWidget(wTurbincontrol);
 
-    QHBoxLayout *switchlayout = new QHBoxLayout();
+    QVBoxLayout *switchlayout = new QVBoxLayout();
 
     switchlayout->addWidget(wSwitchcontrol);
+    switchlayout->addLayout(trainlayout);
 
-    QHBoxLayout *mergelayout = new QHBoxLayout();
+    // QHBoxLayout *mergelayout = new QHBoxLayout();
 
-    mergelayout->addLayout(ledlayout);
-    mergelayout->addLayout(switchlayout);
+    // mergelayout->addLayout(ledlayout);
+    // mergelayout->addLayout(switchlayout);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    QHBoxLayout *mainLayout = new QHBoxLayout;
     // mainLayout->addWidget(wSwitch);
     // mainLayout->addWidget(wHouse1);
     // mainLayout->addWidget(wHouse2);
-    mainLayout->addLayout(mergelayout);
-    mainLayout->addLayout(trainlayout);
+    mainLayout->addLayout(ledlayout);
+    mainLayout->addLayout(switchlayout);
 
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);

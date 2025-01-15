@@ -8,9 +8,9 @@
 #include <QVector>
 
 #include "modbutton.h"
-#include "veloslider.h"
-#include "accslider.h"
-#include "infolabel.h"
+#include "traincontrol/veloslider.h"
+#include "traincontrol/accslider.h"
+#include "traincontrol/infolabel.h"
 
 class Traincontrol : public QWidget
 {

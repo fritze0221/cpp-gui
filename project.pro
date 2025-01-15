@@ -26,7 +26,8 @@ HEADERS += pro.h \
     traincontrol/accslider.h \
     traincontrol/infolabel.h \
     traincontrol/traincontrol.h \
-    traincontrol/veloslider.h
+    traincontrol/veloslider.h \
+    turbincontrol/turbincontrol.h
 SOURCES += main.cpp pro.cpp \
     fonts/fonts.cpp \
     house.cpp \
@@ -37,7 +38,8 @@ SOURCES += main.cpp pro.cpp \
     traincontrol/accslider.cpp \
     traincontrol/infolabel.cpp \
     traincontrol/traincontrol.cpp \
-    traincontrol/veloslider.cpp
+    traincontrol/veloslider.cpp \
+    turbincontrol/turbincontrol.cpp
 
 RESOURCES += \
     res.qrc

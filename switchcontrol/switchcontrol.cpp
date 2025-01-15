@@ -3,7 +3,7 @@
 Switchcontrol::Switchcontrol(QWidget *parent)
 {
 
-    wButton = new modButton(this, buttonColor, 1,"Test");
+    wButton = new modButton(this, buttonColor,"Test");
 
     QHBoxLayout* layout = new QHBoxLayout();
 

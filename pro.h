@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QFontDatabase>
 
-#include "house.h"
+#include "turbincontrol/turbincontrol.h"
 #include "traincontrol//traincontrol.h"
 #include "ledcontrol/ledcontrol.h"
 #include "switchcontrol/switchcontrol.h"
@@ -26,6 +26,8 @@ private:
     Ledcontrol* wLedcontrol2;
 
     Switchcontrol* wSwitchcontrol;
+
+    Turbincontrol* wTurbincontrol;
 
     QSize MainWindowSize;
     QPoint MainWindowPos;
