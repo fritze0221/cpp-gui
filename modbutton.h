@@ -61,12 +61,15 @@ private:
 
     QString buttonStyle = R"(
     QPushButton {
-        background-color: rgb(%1, %2, %3);
-        border-radius: 10px;
-        min-width: 10em;
-        padding: 6px;
-        }
+        background-color: rgb(%1,%2,%3); /* Heller Hintergrund für den Button */
+        border: 4px solid rgb(%4,%5,%6); /* Auffälliger blauer Rahmen */
+        border-radius: 8px; /* Abgerundete Ecken */
+        height: 20 px;
+    }
+
     )";
+
+
 
 
 signals:

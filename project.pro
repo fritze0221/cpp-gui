@@ -19,18 +19,22 @@ QT += gui
 HEADERS += pro.h \
     fonts/fonts.h \
     house.h \
-    led.h \
-    traincontrol/accslider.h \
     modbutton.h \
+    ledcontrol/led.h \
+    ledcontrol/ledcontrol.h \
+    switchcontrol/switchcontrol.h \
+    traincontrol/accslider.h \
     traincontrol/infolabel.h \
     traincontrol/traincontrol.h \
     traincontrol/veloslider.h
 SOURCES += main.cpp pro.cpp \
     fonts/fonts.cpp \
     house.cpp \
-    led.cpp \
-    traincontrol/accslider.cpp \
     modbutton.cpp \
+    ledcontrol/led.cpp \
+    ledcontrol/ledcontrol.cpp \
+    switchcontrol/switchcontrol.cpp \
+    traincontrol/accslider.cpp \
     traincontrol/infolabel.cpp \
     traincontrol/traincontrol.cpp \
     traincontrol/veloslider.cpp

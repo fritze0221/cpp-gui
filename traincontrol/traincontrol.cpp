@@ -4,11 +4,13 @@ Traincontrol::Traincontrol(QWidget *parent)
     : QWidget{parent}
 {
 
-    wVeloSlider = new veloSlider(this,veloSliderColor,5,1,80,"Speed");
+    wVeloSlider = new veloSlider(this,veloSliderColor,5,1,50,"Speed");
     wAccSlider = new accSlider(this,accSliderColor,10,1,1,2,"Acc");
 
     wStopButton = new modButton(this,stopButtonColor,1,"Stop");
     //wApplyButton = new modButton(this, applyButtonColor,1, "Apply");
+
+    wInfoLabel = new infoLabel(this, infoLabelColor, "0");
 
     connect(wStopButton, &modButton::modButtonClicked, wVeloSlider, &veloSlider::onStopButton);
     connect(wAccSlider, &accSlider::sendTime, wVeloSlider, &veloSlider::onTimeValue);
@@ -17,6 +19,7 @@ Traincontrol::Traincontrol(QWidget *parent)
 
     velolayout->addWidget(wAccSlider);
     velolayout->addWidget(wVeloSlider);
+    //velolayout->addWidget(wInfoLabel);
 
     QVBoxLayout* buttonlayout = new QVBoxLayout();
 

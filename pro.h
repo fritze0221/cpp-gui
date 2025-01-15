@@ -1,9 +1,10 @@
 #include <QApplication>
 #include <QFontDatabase>
 
-#include "led.h"
 #include "house.h"
 #include "traincontrol//traincontrol.h"
+#include "ledcontrol/ledcontrol.h"
+#include "switchcontrol/switchcontrol.h"
 
 
 class MainWindow : public QMainWindow{
@@ -18,14 +19,13 @@ private:
 
     void screenGeometry();
 
-    House* wHouse1;
-    House* wHouse2;
-
-    LED* wLED1;
-    LED* wLED2;
-
     Traincontrol* wTraincontrol1;
     Traincontrol* wTraincontrol2;
+
+    Ledcontrol* wLedcontrol1;
+    Ledcontrol* wLedcontrol2;
+
+    Switchcontrol* wSwitchcontrol;
 
     QSize MainWindowSize;
     QPoint MainWindowPos;
@@ -36,7 +36,6 @@ public slots:
     void handleSubWindow(QWidget* Identifier);
 
 protected:
-    void closeEvent(QCloseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void moveEvent(QMoveEvent *event) override;
 };

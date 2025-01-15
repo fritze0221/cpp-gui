@@ -38,18 +38,15 @@ LED::LED(QWidget *parent,int num, QString string)
 
     resetButton = new QPushButton("Reset", this);
     allButton = new QPushButton("All On ", this);
-    quitButton = new QPushButton("Quit", this);
     QHBoxLayout *hbutton = new QHBoxLayout;
 
     connect(resetButton, &QPushButton::clicked, this, [=]()
             { onButtonClicked(bRESET); });
     connect(allButton, &QPushButton::clicked, this, [=]()
             { onButtonClicked(bALL); });
-    connect(quitButton, &QPushButton::clicked, this, &QWidget::close);
 
     hbutton->addWidget(resetButton);
     hbutton->addWidget(allButton);
-    hbutton->addWidget(quitButton);
 
     QVBoxLayout *row = new QVBoxLayout;
 

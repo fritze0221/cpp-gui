@@ -5,13 +5,12 @@
 #include <QVBoxLayout>
 #include <QPaintEvent>
 #include <QPainterPath>
-#include <QResizeEvent>
-#include <QStackedLayout>
 #include <QVector>
 
 #include "modbutton.h"
 #include "veloslider.h"
 #include "accslider.h"
+#include "infolabel.h"
 
 class Traincontrol : public QWidget
 {
@@ -21,6 +20,7 @@ public:
 
     veloSlider* wVeloSlider;
     accSlider* wAccSlider;
+    infoLabel* wInfoLabel;
 
     modButton* wStopButton;
     modButton* wApplyButton;
@@ -37,13 +37,19 @@ public:
     };
 
     QVector<QRgb> stopButtonColor = {
-        qRgb(108, 140, 140),
-        qRgb(201, 4, 40)
+        qRgb(242, 46, 46),
+        qRgb(240, 91, 91),
+        qRgb(173, 26, 26),
+        qRgb(186, 74, 74),
     };
 
     QVector<QRgb> applyButtonColor = {
         qRgb(108, 140, 140),
         qRgb(201, 4, 40)
+    };
+
+    QVector<QRgb> infoLabelColor = {
+      qRgb(255,255,255)
     };
 
 

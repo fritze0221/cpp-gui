@@ -19,17 +19,41 @@ MainWindow::MainWindow(QWidget* parent)
     wTraincontrol1 = new Traincontrol(this);
     wTraincontrol2 = new Traincontrol(this);
 
+    wLedcontrol1 = new Ledcontrol(this);
+    wLedcontrol2 = new Ledcontrol(this);
+
+    wSwitchcontrol = new Switchcontrol(this);
+
     QWidget* centralWidget = new QWidget(this);
 
     // connect(wHouse1, &House::requestOpenSubWindow, this, [=](){handleSubWindow(wLED1);});
     //connect(wHouse2, &House::requestOpenSubWindow, this, [=](){handleSubWindow(wLED2);});
 
-    QHBoxLayout *mainLayout = new QHBoxLayout;
+    QHBoxLayout *trainlayout = new QHBoxLayout();
+
+    trainlayout->addWidget(wTraincontrol1);
+    trainlayout->addWidget(wTraincontrol2);
+
+    QVBoxLayout *ledlayout = new QVBoxLayout();
+
+    ledlayout->addWidget(wLedcontrol1);
+    ledlayout->addWidget(wLedcontrol2);
+
+    QHBoxLayout *switchlayout = new QHBoxLayout();
+
+    switchlayout->addWidget(wSwitchcontrol);
+
+    QHBoxLayout *mergelayout = new QHBoxLayout();
+
+    mergelayout->addLayout(ledlayout);
+    mergelayout->addLayout(switchlayout);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
     // mainLayout->addWidget(wSwitch);
     // mainLayout->addWidget(wHouse1);
     // mainLayout->addWidget(wHouse2);
-    mainLayout->addWidget(wTraincontrol1);
-    mainLayout->addWidget(wTraincontrol2);
+    mainLayout->addLayout(mergelayout);
+    mainLayout->addLayout(trainlayout);
 
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
@@ -70,13 +94,6 @@ void MainWindow::handleSubWindow(QWidget* Identifier){
 
     }
 
-}
-
-void MainWindow::closeEvent(QCloseEvent *event) {
-
-    if (wLED1->isVisible()) wLED1->close();
-
-    if (wLED2->isVisible()) wLED2->close();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event){
