@@ -15,6 +15,15 @@ public:
 
     LED* wLed;
 
+private:
+
+    QVector<QRgb> ledColor = {
+        qRgb(214,51,21),
+        qRgb(21,21,54),
+        qRgb(55,47,147),
+        qRgb(21,21,141)
+    };
+
 signals:
 
 protected:

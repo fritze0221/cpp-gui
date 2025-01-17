@@ -3,7 +3,7 @@
 Ledcontrol::Ledcontrol(QWidget *parent)
 {
 
-    wLed = new LED(this, 9, "LED");
+    wLed = new LED(this, 8, ledColor);
 
     setMaximumSize(250,250);
 

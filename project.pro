@@ -18,7 +18,6 @@ QT += gui
 # Input
 HEADERS += pro.h \
     fonts/fonts.h \
-    house.h \
     modbutton.h \
     ledcontrol/led.h \
     ledcontrol/ledcontrol.h \
@@ -30,7 +29,6 @@ HEADERS += pro.h \
     turbincontrol/turbincontrol.h
 SOURCES += main.cpp pro.cpp \
     fonts/fonts.cpp \
-    house.cpp \
     modbutton.cpp \
     ledcontrol/led.cpp \
     ledcontrol/ledcontrol.cpp \

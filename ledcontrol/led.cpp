@@ -1,8 +1,13 @@
 #include "led.h"
 
-LED::LED(QWidget *parent,int num, QString string)
+LED::LED(QWidget *parent,int num, QVector<QRgb> color)
     : size(num)
 {
+    sliderColor << color;
+
+    for(int i = 0; )
+
+    qBound(0,i,3);
 
     Slider.resize(num);
 
@@ -19,7 +24,7 @@ LED::LED(QWidget *parent,int num, QString string)
         Slider[i]->setMinimum(0);
         Slider[i]->setTickPosition(QSlider::TicksBelow);
         Slider[i]->setTickInterval(1);
-        Slider[i]->setStyleSheet(sheet1);
+        Slider[i]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])).arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])));
 
         connect(Slider[i], &QSlider::valueChanged, this, [=]()
                 { onSliderChanged(i); });
@@ -35,6 +40,7 @@ LED::LED(QWidget *parent,int num, QString string)
             j++;
         }
     }
+
 
     resetButton = new QPushButton("Reset", this);
     allButton = new QPushButton("All On ", this);
@@ -52,8 +58,6 @@ LED::LED(QWidget *parent,int num, QString string)
 
     row->addLayout(grid);
     row->addLayout(hbutton);
-
-    setWindowTitle(string);
 
     setLayout(row);
 }
@@ -80,27 +84,12 @@ void LED::onSliderChanged(int sliderIndex)
     int value = Slider[sliderIndex]->value();
 
     if (value == 1){
-        Slider[sliderIndex]->setStyleSheet(sheet2);
+        Slider[sliderIndex]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[2])).arg(qGreen(sliderColor[2])).arg(qBlue(sliderColor[2])).arg(qRed(sliderColor[3])).arg(qGreen(sliderColor[3])).arg(qBlue(sliderColor[3])));
     }
 
     if (value == 0){
-        Slider[sliderIndex]->setStyleSheet(sheet1);
+        Slider[sliderIndex]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])).arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])));
     }
 }
 
-void LED::resizeEvent(QResizeEvent *event){
-
-    QWidget::resizeEvent(event);
-
-    LEDSize = event->size();
-
-}
-
-void LED::moveEvent(QMoveEvent *event){
-
-    QWidget::moveEvent(event);
-
-    LEDPos = event->pos();
-
-}
 

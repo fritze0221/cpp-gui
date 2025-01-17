@@ -12,9 +12,6 @@ Traincontrol::Traincontrol(QWidget *parent)
 
     wInfoLabel = new infoLabel(this, infoLabelColor, "0");
 
-    connect(wStopButton, &modButton::modButtonClicked, wVeloSlider, &veloSlider::onStopButton);
-    connect(wAccSlider, &accSlider::sendTime, wVeloSlider, &veloSlider::onTimeValue);
-
     QHBoxLayout* velolayout = new QHBoxLayout();
 
     velolayout->addWidget(wAccSlider);

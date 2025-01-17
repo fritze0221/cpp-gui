@@ -75,7 +75,6 @@ private slots:
 
     void onButtonReleased();
     void onButtonPressed();
-    void onTimerOut();
 
 };
 

@@ -1,5 +1,4 @@
 #include <QWidget>
-#include <QPushButton>
 #include <QLabel>
 #include <QSlider>
 #include <QDebug>
@@ -7,6 +6,7 @@
 #include <QResizeEvent>
 #include <QGridLayout>
 
+#include "modbutton.h"
 
 #ifndef LED_H
 #define LED_H
@@ -17,61 +17,60 @@ class LED : public QWidget{
 
 public:
 
-    LED(QWidget* parent,int num, QString string);
+    LED(QWidget* parent,int num,QVector<QRgb> color);
 
-    QSize LEDSize;
-    QPoint LEDPos;
+    modButton* resetButton;
+    modButton* allButton;
+    modButton* quitButton;
+
+    QVector<QSlider*> Slider;
 
 private:
 
-    QPushButton* resetButton;
-    QPushButton* allButton;
-    QPushButton* quitButton;
-    QVector<QSlider*> Slider;
+
 
     int size;
 
     const int bRESET = 0;
     const int bALL = 1;
 
-    const char* sheet1 = R"(
-            QSlider::groove:horizontal {
-            height: 20px;
-            background: #b0b0b0;
-            border-radius: 10px;
-            }
-            QSlider::handle:horizontal {
-            width: 20px;
-            background: #ffffff;
-            border: 1px solid #5c5c5c;
-            margin: -5px 0;
-            border-radius: 10px;
-            }
-            )";
+    QVector<QRgb> sliderColor;
+    QVector<QRgb> buttonColor;
 
-    const char* sheet2 = R"(
-            QSlider::groove:horizontal {
-            height: 20px;
-            background: #468641;
-            border-radius: 10px;
-            }
-            QSlider::handle:horizontal {
-            width: 20px;
-            background: #ffffff;
-            border: 1px solid #5c5c5c;
-            margin: -5px 0;
-            border-radius: 10px;
-            }
-            )";
+    QString sliderStyle = R"(
+        QSlider::groove:horizontal {
+        height: 6px;
+        background: transparent;
+        margin: 8px;
+        border: 1px solid #c17d08;
+        border-radius: 12px;
+        }
+
+        QSlider::sub-page:horizontal {
+        background: rgb(%1,%2,%3);
+        height: 6px;
+        border-radius: 12px;
+        }
+
+        QSlider::add-page:horizontal {
+        background: rgb(%4, %5, %6);
+        height: 10px;
+        border-radius: 12px;
+        }
+
+        QSlider::handle:horizontal {
+        background: transparent;
+        margin: -10px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        }
+    )";
 
 
 private slots:
     void onSliderChanged(int sliderIndex);
     void onButtonClicked(int buttonIndex);
 
-protected:
-    void resizeEvent(QResizeEvent *event) override;
-    void moveEvent(QMoveEvent *event) override;
 
 };
 

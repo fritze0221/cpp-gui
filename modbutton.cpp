@@ -20,7 +20,6 @@ modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text)
 
     connect(button, &QPushButton::pressed, this, &modButton::onButtonPressed);
     connect(button, &QPushButton::released, this, &modButton::onButtonReleased);
-    connect(buttonTimer, &QTimer::timeout, this, &modButton::onTimerOut);
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(button);
@@ -30,10 +29,6 @@ modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text)
 void modButton::onButtonPressed(){
 
     button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[2])).arg(qGreen(ButtonColor[2])).arg(qBlue(ButtonColor[2])).arg(qRed(ButtonColor[3])).arg(qGreen(ButtonColor[3])).arg(qBlue(ButtonColor[3])));
-
-
-    // buttonTimer->setInterval(time);
-    // buttonTimer->start();
 
 }
 
