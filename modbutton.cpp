@@ -1,6 +1,6 @@
 #include "modbutton.h"
 
-modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text)
+modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text,int mode)
 {
     ButtonColor << color;
     ButtonText = text;
@@ -18,8 +18,24 @@ modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text)
     button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[1])).arg(qGreen(ButtonColor[1])).arg(qBlue(ButtonColor[1])));
     button->setFont(customFont);
 
-    connect(button, &QPushButton::pressed, this, &modButton::onButtonPressed);
-    connect(button, &QPushButton::released, this, &modButton::onButtonReleased);
+    if(mode == 0){
+
+        connect(button, &QPushButton::pressed, this, &modButton::onButtonPressed);
+        connect(button, &QPushButton::released, this, &modButton::onButtonReleased);
+
+    }
+
+    else if(mode == 1){
+
+        connect(button, &QPushButton::clicked, this, &modButton::onButtonClicked);
+
+    }
+
+    else{
+
+        qDebug() << "invalid mode" << parent;
+
+    }
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(button);
@@ -42,11 +58,24 @@ void modButton::onButtonReleased(){
     g_tmp = (int)qGreen(ButtonColor[0]);
     b_tmp = (int)qBlue(ButtonColor[0]);
 
-    emit modButtonClicked();
+    emit sendButtonClicked();
 
 }
 
-modButton::~modButton(){
+void modButton::onButtonClicked(){
+
+    if(clicked_state){
+
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[2])).arg(qGreen(ButtonColor[2])).arg(qBlue(ButtonColor[2])).arg(qRed(ButtonColor[3])).arg(qGreen(ButtonColor[3])).arg(qBlue(ButtonColor[3])));
+        clicked_state = false;
+    }
+    else{
+
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])));
+        clicked_state = true;
+
+    }
 
 
+    emit sendButtonClicked();
 }

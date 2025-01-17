@@ -14,16 +14,28 @@ class Switchcontrol : public QWidget
 public:
     explicit Switchcontrol(QWidget *parent);
 
-    modButton* wButton;
+    modButton* wInnerButton;
+    modButton* wOuterButton;
 
 private:
 
-    QVector<QRgb> buttonColor = {
+    QVector<QRgb> innerButtonColor = {
 
         qRgb(31,131,13),
         qRgb(12,12,43),
-        qRgb(123,112,32)
+        qRgb(123,112,32),
+        qRgb(123,57,23)
+
     };
+
+    QVector<QRgb> outerButtonColor = {
+
+        qRgb(31,131,13),
+        qRgb(12,12,43),
+        qRgb(123,112,32),
+        qRgb(123,34,32)
+
+};
 
 signals:
 

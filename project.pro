@@ -42,4 +42,3 @@ SOURCES += main.cpp pro.cpp \
 RESOURCES += \
     res.qrc
 
-FORMS +=

@@ -1,13 +1,9 @@
 #include "led.h"
 
-LED::LED(QWidget *parent,int num, QVector<QRgb> color)
+ledGrid::ledGrid(QWidget *parent,int num, QVector<QRgb> color)
     : size(num)
 {
     sliderColor << color;
-
-    for(int i = 0; )
-
-    qBound(0,i,3);
 
     Slider.resize(num);
 
@@ -42,44 +38,26 @@ LED::LED(QWidget *parent,int num, QVector<QRgb> color)
     }
 
 
-    resetButton = new QPushButton("Reset", this);
-    allButton = new QPushButton("All On ", this);
-    QHBoxLayout *hbutton = new QHBoxLayout;
-
-    connect(resetButton, &QPushButton::clicked, this, [=]()
-            { onButtonClicked(bRESET); });
-    connect(allButton, &QPushButton::clicked, this, [=]()
-            { onButtonClicked(bALL); });
-
-    hbutton->addWidget(resetButton);
-    hbutton->addWidget(allButton);
-
-    QVBoxLayout *row = new QVBoxLayout;
-
-    row->addLayout(grid);
-    row->addLayout(hbutton);
-
-    setLayout(row);
+    setLayout(grid);
 }
 
-void LED::onButtonClicked(int buttonindex)
+void ledGrid::onResetButtonClicked()
 {
 
-    qDebug() << "Button: " << buttonindex;
+    for (int i = 0; i < size; i++)
+        Slider[i]->setValue(0);
 
-    if (buttonindex == bRESET)
-        for (int i = 0; i < size; i++)
-            Slider[i]->setValue(0);
-
-    if (buttonindex == bALL)
-        for (int i = 0; i < size; i++)
-            Slider[i]->setValue(1);
 }
 
-void LED::onSliderChanged(int sliderIndex)
+void ledGrid::onAllButtonClicked()
 {
 
-    qDebug() << "Slider: " << sliderIndex;
+    for (int i = 0; i < size; i++)
+        Slider[i]->setValue(1);
+}
+
+void ledGrid::onSliderChanged(int sliderIndex)
+{
 
     int value = Slider[sliderIndex]->value();
 

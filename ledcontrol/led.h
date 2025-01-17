@@ -6,28 +6,21 @@
 #include <QResizeEvent>
 #include <QGridLayout>
 
-#include "modbutton.h"
+#ifndef LEDGRID_H
+#define LEDGRID_H
 
-#ifndef LED_H
-#define LED_H
-
-class LED : public QWidget{
+class ledGrid : public QWidget{
     Q_OBJECT
 
 
 public:
 
-    LED(QWidget* parent,int num,QVector<QRgb> color);
+    ledGrid(QWidget* parent,int num,QVector<QRgb> color);
 
-    modButton* resetButton;
-    modButton* allButton;
-    modButton* quitButton;
 
     QVector<QSlider*> Slider;
 
 private:
-
-
 
     int size;
 
@@ -35,7 +28,6 @@ private:
     const int bALL = 1;
 
     QVector<QRgb> sliderColor;
-    QVector<QRgb> buttonColor;
 
     QString sliderStyle = R"(
         QSlider::groove:horizontal {
@@ -66,13 +58,16 @@ private:
         }
     )";
 
+public slots:
+
+    void onResetButtonClicked();
+    void onAllButtonClicked();
 
 private slots:
     void onSliderChanged(int sliderIndex);
-    void onButtonClicked(int buttonIndex);
 
 
 };
 
 
-#endif // LED_H
+#endif // LEDGRID_H

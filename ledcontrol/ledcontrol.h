@@ -6,6 +6,7 @@
 #include <QLayout>
 
 #include "ledcontrol/led.h"
+#include "modbutton.h"
 
 class Ledcontrol : public QWidget
 {
@@ -13,7 +14,10 @@ class Ledcontrol : public QWidget
 public:
     explicit Ledcontrol(QWidget *parent);
 
-    LED* wLed;
+    ledGrid* wLedGrid;
+
+    modButton* wResetButton;
+    modButton* wAllButton;
 
 private:
 
@@ -23,6 +27,22 @@ private:
         qRgb(55,47,147),
         qRgb(21,21,141)
     };
+
+    QVector<QRgb> resetButtonColor = {
+          qRgb(12,23,123),
+          qRgb(112,21,21),
+          qRgb(112,21,21),
+          qRgb(12,23,123)
+    };
+
+
+    QVector<QRgb> allButtonColor = {
+        qRgb(12,23,123),
+        qRgb(112,21,21),
+        qRgb(112,21,21),
+        qRgb(12,23,123)
+    };
+
 
 signals:
 

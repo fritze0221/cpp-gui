@@ -3,14 +3,26 @@
 Ledcontrol::Ledcontrol(QWidget *parent)
 {
 
-    wLed = new LED(this, 8, ledColor);
+    wLedGrid = new ledGrid(this, 8, ledColor);
+
+    wResetButton = new modButton(this, resetButtonColor, "Reset",0);
+    wAllButton = new modButton(this, allButtonColor, "All", 0);
+
+    connect(wResetButton, &modButton::sendButtonClicked, wLedGrid, &ledGrid::onResetButtonClicked);
+    connect(wAllButton, &modButton::sendButtonClicked, wLedGrid, &ledGrid::onAllButtonClicked);
+
+    QHBoxLayout* buttonlayout = new QHBoxLayout();
+
+    buttonlayout->addWidget(wAllButton);
+    buttonlayout->addWidget(wResetButton);
+
+    QVBoxLayout* layout = new QVBoxLayout();
+
+    layout->addWidget(wLedGrid);
+    layout->addLayout(buttonlayout);
+
 
     setMaximumSize(250,250);
-
-    QHBoxLayout* layout = new QHBoxLayout();
-
-    layout->addWidget(wLed);
-
     setLayout(layout);
 
 }

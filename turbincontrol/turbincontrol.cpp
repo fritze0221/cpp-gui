@@ -5,7 +5,7 @@ Turbincontrol::Turbincontrol(QObject *parent)
 
     //buttonColor << color;
 
-    button = new modButton(this, buttonColor, "Turbin");
+    button = new modButton(this, buttonColor, "Turbin",1);
 
     QHBoxLayout* layout = new QHBoxLayout();
 

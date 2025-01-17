@@ -36,11 +36,14 @@ public:
      *               - `color[2]`: Farbe für den Button (pushed).
      *               - `color[3]`: Farbe für den Buttonrand (pushed) .
      * @param text Buttontext.
+     * @param mode
+     *      - 0 : pressed
+     *      - 1 : clicked
      */
 
 
-    modButton(QWidget *parent, QVector<QRgb> color, QString text);
-    ~modButton();
+    modButton(QWidget *parent, QVector<QRgb> color, QString text, int mode);
+
 
     QPushButton* button;
     QTimer* buttonTimer;
@@ -53,6 +56,8 @@ private:
 
     QVector<QRgb> ButtonColor;
     QString ButtonText;
+
+    bool clicked_state = true;
 
     QString buttonStyle = R"(
     QPushButton {
@@ -69,12 +74,14 @@ private:
 
 signals:
 
-    void modButtonClicked();
+    void sendButtonClicked();
 
 private slots:
 
     void onButtonReleased();
     void onButtonPressed();
+
+    void onButtonClicked();
 
 };
 
