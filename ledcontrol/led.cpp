@@ -6,6 +6,7 @@ ledGrid::ledGrid(QWidget *parent,int num, QVector<QRgb> color)
     sliderColor << color;
 
     Slider.resize(num);
+    cur_value.resize(num);
 
     QGridLayout *grid = new QGridLayout;
 
@@ -15,15 +16,25 @@ ledGrid::ledGrid(QWidget *parent,int num, QVector<QRgb> color)
     for (int i = 0; i < num; i++)
     {
 
+        cur_value[i] = 0;
+
         Slider[i] = new QSlider(Qt::Horizontal);
         Slider[i]->setMaximum(1);
         Slider[i]->setMinimum(0);
         Slider[i]->setTickPosition(QSlider::TicksBelow);
         Slider[i]->setTickInterval(1);
-        Slider[i]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])).arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])));
+        Slider[i]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[2])).arg(qGreen(sliderColor[2])).arg(qBlue(sliderColor[2])).arg(qRed(sliderColor[3])).arg(qGreen(sliderColor[3])).arg(qBlue(sliderColor[3])));
+        Slider[i]->setValue(cur_value[i]);
 
-        connect(Slider[i], &QSlider::valueChanged, this, [=]()
-                { onSliderChanged(i); });
+        Slider[i]->setTracking(false); // Optional: keine sofortige Änderungen am Wert; // Optional: um Interaktion komplett zu verhindern
+
+        connect(Slider[i], &QSlider::sliderPressed, this, [=]()
+                { onSliderPressed(i); });
+
+        connect(Slider[i], &QSlider::sliderReleased, this, [=]()
+                { onSliderReleased(i); });
+
+
 
         grid->addWidget(Slider[i], j, k);
 
@@ -44,30 +55,65 @@ ledGrid::ledGrid(QWidget *parent,int num, QVector<QRgb> color)
 void ledGrid::onResetButtonClicked()
 {
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++){
+
         Slider[i]->setValue(0);
+        cur_value[i] = 0;
+
+        Slider[i]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[2])).arg(qGreen(sliderColor[2])).arg(qBlue(sliderColor[2])).arg(qRed(sliderColor[3])).arg(qGreen(sliderColor[3])).arg(qBlue(sliderColor[3])));
+
+    }
 
 }
 
 void ledGrid::onAllButtonClicked()
 {
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++){
+
         Slider[i]->setValue(1);
+        cur_value[i] = 1;
+
+
+        Slider[i]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])).arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])));
+    }
 }
 
-void ledGrid::onSliderChanged(int sliderIndex)
+void ledGrid::onSliderPressed(int sliderIndex)
 {
 
-    int value = Slider[sliderIndex]->value();
+    bool lock = true;
 
-    if (value == 1){
+    if ((cur_value[sliderIndex] == 1) && lock){
         Slider[sliderIndex]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[2])).arg(qGreen(sliderColor[2])).arg(qBlue(sliderColor[2])).arg(qRed(sliderColor[3])).arg(qGreen(sliderColor[3])).arg(qBlue(sliderColor[3])));
+
+        cur_value[sliderIndex] = 0;
+
+        qDebug() << "pressed" << cur_value[sliderIndex];
+
+
+        Slider[sliderIndex]->setValue(cur_value[sliderIndex]);
+
+        lock = false;
     }
 
-    if (value == 0){
+    if ((cur_value[sliderIndex] == 0) && lock){
         Slider[sliderIndex]->setStyleSheet(sliderStyle.arg(qRed(sliderColor[0])).arg(qGreen(sliderColor[0])).arg(qBlue(sliderColor[0])).arg(qRed(sliderColor[1])).arg(qGreen(sliderColor[1])).arg(qBlue(sliderColor[1])));
+
+        cur_value[sliderIndex] = 1;
+
+        qDebug() << "pressed" << cur_value[sliderIndex];
+
+        Slider[sliderIndex]->setValue(cur_value[sliderIndex]);
+
+        lock = false;
+
     }
 }
 
+void ledGrid::onSliderReleased(int sliderIndex){
+
+    Slider[sliderIndex]->setValue(cur_value[sliderIndex]);
+
+}
 

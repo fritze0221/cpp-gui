@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QResizeEvent>
 #include <QGridLayout>
+#include <QMouseEvent>
 
 #ifndef LEDGRID_H
 #define LEDGRID_H
@@ -26,6 +27,8 @@ private:
 
     const int bRESET = 0;
     const int bALL = 1;
+
+    QVector<int> cur_value;
 
     QVector<QRgb> sliderColor;
 
@@ -64,7 +67,8 @@ public slots:
     void onAllButtonClicked();
 
 private slots:
-    void onSliderChanged(int sliderIndex);
+    void onSliderPressed(int sliderIndex);
+    void onSliderReleased(int sliderIndex);
 
 
 };

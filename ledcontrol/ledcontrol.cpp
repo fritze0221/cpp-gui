@@ -5,8 +5,8 @@ Ledcontrol::Ledcontrol(QWidget *parent)
 
     wLedGrid = new ledGrid(this, 8, ledColor);
 
-    wResetButton = new modButton(this, resetButtonColor, "Reset",0);
-    wAllButton = new modButton(this, allButtonColor, "All", 0);
+    wResetButton = new modButton(this, resetButtonColor, "Reset",0,false);
+    wAllButton = new modButton(this, allButtonColor, "All", 0,false);
 
     connect(wResetButton, &modButton::sendButtonClicked, wLedGrid, &ledGrid::onResetButtonClicked);
     connect(wAllButton, &modButton::sendButtonClicked, wLedGrid, &ledGrid::onAllButtonClicked);

@@ -1,6 +1,6 @@
 #include "modbutton.h"
 
-modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text,int mode)
+modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text,int mode,bool start_cond)
 {
     ButtonColor << color;
     ButtonText = text;
@@ -15,7 +15,19 @@ modButton::modButton(QWidget *parent, QVector<QRgb> color, QString text,int mode
     b_tmp = (int)qBlue(ButtonColor[0]);
 
     button->setText(ButtonText);
-    button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[1])).arg(qGreen(ButtonColor[1])).arg(qBlue(ButtonColor[1])));
+
+    if(start_cond){
+
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[2])).arg(qGreen(ButtonColor[2])).arg(qBlue(ButtonColor[2])).arg(qRed(ButtonColor[3])).arg(qGreen(ButtonColor[3])).arg(qBlue(ButtonColor[3])));
+        clicked_state = false;
+
+    }
+    else{
+
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[1])).arg(qGreen(ButtonColor[1])).arg(qBlue(ButtonColor[1])));
+
+    }
+
     button->setFont(customFont);
 
     if(mode == 0){
@@ -71,11 +83,27 @@ void modButton::onButtonClicked(){
     }
     else{
 
-        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])));
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[1])).arg(qGreen(ButtonColor[1])).arg(qBlue(ButtonColor[1])));
         clicked_state = true;
 
     }
 
-
+    emit sendSwitchSignal();
     emit sendButtonClicked();
+}
+
+void modButton::onSwitchSignal(){
+
+    if(clicked_state){
+
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[2])).arg(qGreen(ButtonColor[2])).arg(qBlue(ButtonColor[2])).arg(qRed(ButtonColor[3])).arg(qGreen(ButtonColor[3])).arg(qBlue(ButtonColor[3])));
+        clicked_state = false;
+    }
+    else{
+
+        button->setStyleSheet(buttonStyle.arg(qRed(ButtonColor[0])).arg(qGreen(ButtonColor[0])).arg(qBlue(ButtonColor[0])).arg(qRed(ButtonColor[1])).arg(qGreen(ButtonColor[1])).arg(qBlue(ButtonColor[1])));
+        clicked_state = true;
+
+    }
+
 }

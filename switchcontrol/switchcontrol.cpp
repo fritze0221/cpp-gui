@@ -3,8 +3,11 @@
 Switchcontrol::Switchcontrol(QWidget *parent)
 {
 
-    wInnerButton = new modButton(this, innerButtonColor,"Inner",1);
-    wOuterButton = new modButton(this, outerButtonColor, "Outer", 1);
+    wInnerButton = new modButton(this, innerButtonColor,"Inner",1,true);
+    wOuterButton = new modButton(this, outerButtonColor, "Outer", 1,false);
+
+    connect(wInnerButton, &modButton::sendSwitchSignal, wOuterButton, &modButton::onSwitchSignal);
+    connect(wOuterButton, &modButton::sendSwitchSignal, wInnerButton, &modButton::onSwitchSignal);
 
     QHBoxLayout* layout = new QHBoxLayout();
 

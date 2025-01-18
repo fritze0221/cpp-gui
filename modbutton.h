@@ -39,10 +39,13 @@ public:
      * @param mode
      *      - 0 : pressed
      *      - 1 : clicked
+     * @param start_cond
+     *      - true clicked
+     *      - false not clicked
      */
 
 
-    modButton(QWidget *parent, QVector<QRgb> color, QString text, int mode);
+    modButton(QWidget *parent, QVector<QRgb> color, QString text, int mode,bool start_cond);
 
 
     QPushButton* button;
@@ -70,11 +73,15 @@ private:
     )";
 
 
+public slots:
 
+    void onSwitchSignal();
 
 signals:
 
     void sendButtonClicked();
+
+    void sendSwitchSignal();
 
 private slots:
 
@@ -82,6 +89,7 @@ private slots:
     void onButtonPressed();
 
     void onButtonClicked();
+
 
 };
 

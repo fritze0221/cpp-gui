@@ -7,7 +7,7 @@ Traincontrol::Traincontrol(QWidget *parent)
     wVeloSlider = new veloSlider(this,veloSliderColor,5,1,50,"Speed");
     wAccSlider = new accSlider(this,accSliderColor,10,1,1,2,"Acc");
 
-    wStopButton = new modButton(this,stopButtonColor,"Stop",0);
+    wStopButton = new modButton(this,stopButtonColor,"Stop",0,false);
     //wApplyButton = new modButton(this, applyButtonColor,1, "Apply");
 
     wInfoLabel = new infoLabel(this, infoLabelColor, "0");
